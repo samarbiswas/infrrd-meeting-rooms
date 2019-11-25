@@ -82,7 +82,8 @@
                             <button type="submit" [disabled]="!bookingForm.form.valid">Confirm Booking!</button>
                         </div>
                     </form>
-                    <p *ngIf="bookingFormSlotFilterOption.startTime && bookingFormSlotFilterOption.endTime">
+                    <p class="message" 
+                    *ngIf="bookingFormSlotFilterOption.startTime && bookingFormSlotFilterOption.endTime">
                         {{bookingFormSlotFilterOption.startTime | date:'h:mm a'}} to {{bookingFormSlotFilterOption.endTime | date:'h:mm a'}} 
                         is
                         {{ checkRoomAvailability(room) }}
