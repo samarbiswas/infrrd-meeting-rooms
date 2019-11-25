@@ -1,0 +1,89 @@
+.page-container {
+    width: 90%;
+    max-width: 700px;
+    margin: 0 auto;
+}
+.page-header {
+    padding:20px;
+    text-align: center;
+    background: #1abc9c;
+    color: white;
+    margin-bottom: 16px;
+}
+.room-filter-options {
+    text-align: center;
+}
+.meeting-rooms-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+.meeting-room {
+    box-shadow: 2px 4px 8px 0 rgba(0,0,0,0.2);
+    text-align: center;
+}
+.meeting-room .room-name {
+    color: #757575;
+    text-align: center;
+    background-color: #1abc9c;
+    color: #fff;
+}
+.bookings .booking-detail {
+    position: relative;
+    display: inline-block;
+    width: 200px;
+    border: 1px solid #dadada;
+    margin: 5px;
+}
+.bookings .slot{
+    margin: 1px 5px;
+} 
+.bookings .username{
+    margin : 1px 5px;
+}
+.booking-btn {
+    margin: 5px;
+}
+.form-group {
+    display: inline-block;
+    width: 80%;
+    min-width: 100px;
+    max-width: 300px;
+    margin: 5px;
+}
+.form-group label {
+    display: inline-block;
+    width:100%;
+}
+
+.form-control {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+.delete {
+    display:inline-block;
+    border:1px solid red;
+    border-radius:50%;
+    width:16px;
+    height:16px;
+    padding:3px;
+    background-color:rgba(255, 0, 0, 0.7);
+    color:#fff;
+    position:absolute;
+    top:-10px;
+    right:-10px;
+}
+.slot-filter-title {
+    margin: 2px;
+}
+.filter-options {
+    padding: 10px 0;
+    margin: 10px 0;
+    /* border: 1px solid #dadada; */
+    box-shadow: 2px 4px 8px 0 rgba(0,0,0,0.2);
+}

@@ -1,0 +1,94 @@
+<div class="page-container">
+    <div class="page-header">
+        <h1>Infrrd Meeting Rooms</h1>
+    </div>
+    <div class="content-container">
+        <div class="room-filter-options">
+            <div class="filter-options date-filter">
+                Select Date : <input type="date" [(ngModel)]="selectedDate"
+                    (change)="onSelectedDateChange($event.target.value)" />
+
+            </div>
+            <div class="filter-options slot-filter">
+                <p class="slot-filter-title">Check Slot Availability </p>
+                <div class="form-group">
+                    <label for="startTimeFilter">Start Time</label>
+                    <select name="startTimeFilter" id="startTimeFilter" class="form-control" [(ngModel)]="bookingFormSlotFilterOption.startTime"
+                        (change)="onSelectStartDateFilterOption($event.target.value)" required>
+                        <option *ngFor="let slot of startTimeSlots" [value]="slot.startTime.getTime()">
+                            {{slot.startTime | date:'h:mm a'}}</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="endTimeFilter">End Time</label>
+                    <select name="endTimeFilter" id="endTimeFilter" class="form-control" [(ngModel)]="bookingFormSlotFilterOption.endTime"
+                        required>
+                        <option *ngFor="let slot of endTimeSlotsFilterOption" [value]="slot.startTime.getTime()">
+                            {{slot.startTime | date:'h:mm a'}}</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div>
+            <ul class="meeting-rooms-list">
+                <li class="meeting-room" *ngFor="let room of rooms">
+
+                    <p class="room-name">Room {{room.roomId}}</p>
+                    <div class="bookings">
+                        <p *ngIf="getBookedSlots(room).length === 0">No bookings found.</p>
+                        <div class="booking-detail"
+                            *ngFor="let booking of getBookedSlots(room); let bookingItemIndex = index">
+                            <p class="slot">{{booking.startTime | date:'h:mm a'}} - {{booking.endTime | date:'h:mm a'}}
+                            </p>
+                            <p class="username">By {{booking.username}}</p>
+                            <span class="delete"
+                                (click)="deleteBooking(getBookedSlots(room), bookingItemIndex)">X</span>
+                        </div>
+                    </div>
+
+                    <button class="booking-btn" type="button" (click)="bookRoom(room)"
+                        *ngIf="bookingRoom?.roomId != room.roomId">Book</button>
+
+                    <form class="booking-form" *ngIf="bookingRoom?.roomId === room.roomId" (ngSubmit)="submitBooking()"
+                        #bookingForm="ngForm">
+                        <div class="form-group">
+                            <label for="startTime">Start Time</label>
+                            <select name="startTime" id="startTime" class="form-control"
+                                [(ngModel)]="bookingFormSlot.startTime"
+                                (change)="onSelectStartDate($event.target.value)" required>
+                                <option *ngFor="let slot of startTimeSlots" [value]="slot.startTime.getTime()">
+                                    {{slot.startTime | date:'h:mm a'}}</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="endTime">End Time</label>
+                            <select name="endTime" id="endTime" class="form-control"
+                                [(ngModel)]="bookingFormSlot.endTime" required>
+                                <option *ngFor="let slot of endTimeSlots" [value]="slot.startTime.getTime()">
+                                    {{slot.startTime | date:'h:mm a'}}</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="username">Username</label>
+                            <input type="text" id="username" name="username" class="form-control"
+                                [(ngModel)]="bookingFormSlot.username" required />
+                        </div>
+                        <div class="form-group">
+                            <label for="agenda">Agenda</label>
+                            <input type="text" id="agenda" name="agenda" class="form-control"
+                                [(ngModel)]="bookingFormSlot.agenda" required />
+                        </div>
+                        <div class="form-group">
+                            <button type="submit" [disabled]="!bookingForm.form.valid">Confirm Booking!</button>
+                        </div>
+                    </form>
+                    <p *ngIf="bookingFormSlotFilterOption.startTime && bookingFormSlotFilterOption.endTime">
+                        {{bookingFormSlotFilterOption.startTime | date:'h:mm a'}} to {{bookingFormSlotFilterOption.endTime | date:'h:mm a'}} 
+                        is
+                        {{ checkRoomAvailability(room) }}
+                    </p>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
